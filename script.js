@@ -34,4 +34,27 @@ var questions = [
 var score = 0;
 
 //API
-var time = document.querySelector()
+var time = document.querySelector(".current-Time");
+var container = document.querySelector(".container");
+var question = document.querySelector(".question");
+var timer = document.querySelector(".start")
+var ul = document.querySelector(".choices")
+
+//timer varibles
+// 10s per question
+var secondsleft = 60
+// hold interval time
+var holdInterval = 0;
+//penalty time
+var penalty = 5;
+
+timer.addEventListener("click", function() {
+    if (holdInterval === 0) {
+        holdInterval = setInterval(function() {
+            secondsleft--;
+            time.textContent = "time: " + secondsleft;
+
+            if ()
+        }
+    }
+}
