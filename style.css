@@ -10,3 +10,20 @@ button{
     border-radius: 5px;
     box-shadow: 2px 3px;
 }
+span{
+    color: blue;
+    font-size: large;
+}
+.controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.question-container{
+    width: fit-content ;
+    max-width: 90%;
+    background-color: white;
+    border-radius: 2px;
+    padding: 5px;
+}

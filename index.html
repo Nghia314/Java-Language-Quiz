@@ -9,16 +9,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="current-Time"></div>
-        <div class="question">
-            <h1>JavaScript Quiz challenge</h1>
-            <p>Try answer as much as you can within time limit. Please keep in my everytime you get it wrong, it will penalty 10sec from your current-Time</p>
-            <ul class="choices"></ul>
-            <button class="start">Quiz start</button>
+    <main class="Quiz">
+        <div class="header">
+             <h1>JavaScript Quiz challenge</h1>
+             <span id="timerArea"></span>
+             <p>Try answer as much as you can within time limit. Please keep in mind everytime you get it wrong, it will penalty<span> 10 sec</span>from your current-Time</p>
         </div>
+        <section id="question-container">
+            <div id="question"></div>
+            <div id="choices"></div>
+            <div id="answer"></div>
+        </section>
+        <section class="scores">
+            <div id="points"></div>
+        </section>
+        <section class="controls">
+            <button class="start" id="startbutton">START</button>
+            <input type="text" name="Initials" id="initials">
+            <button id="scoresSubmit" class="Submit">Submit Your scores</button>
+            <button class="button" id="showscores">See High scores</button>
+        </section>
+        
 
-    </div>
+    </main>
 
     <script src="script.js"></script>
     
