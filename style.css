@@ -4,3 +4,9 @@ body{
     font-size: large;
     color: black;
 }
+button{
+    background-color:blue;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 2px 3px;
+}
