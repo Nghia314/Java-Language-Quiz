@@ -1,38 +1,96 @@
-//create question and choices
+//create question and choices,asnwer
 var questions = [
-    { Number: 1,
-      question:"What is the extension of java code files?",
-      choices:(".js","txt",".class",".java"),
-      Answer: ".java"
-    },
-    {Number: 2,
-       title:"what is printed (system.out.print(hello,\nworld!);?",
-      choices:("Hello,\nworld!","Hello,world!","Nothing","None of the above"),
-      Answer: "Nothing" 
-
-    },
-    { Number: 3,
-      title: "Which of the following variable declaration would NOT compile in a java program?",
-      choices:("int var;","int VAR;","int var1;","int1_var;"),
-      Answer: "Int1_var;" 
-
-    },
-    { Number: 4,
-      title:"What is the size of boolean variable?",
-      choices:("8 bit","16 bit","32 bit","not precisely defined"),
-      Answer: "16 bit" 
-
-    },
-    {Number: 5,
-       title:"which of the following is true about String",
-      choices:("String is mutable","String is immutable","string is a date type","None of the above"),
-      Answer: "String is immutable" 
-
-    },
-    {Number: 6,
-       title:"What is a correct syntax to output (Hello world) in java?",
-      choices:("system.out.print('hello world')","echo('hello world')","print('Hello world')"),
-      Answer: "system.out.print('hello world')" 
-
-    },
+   {
+     Numb: 1,
+     questions:"What is the extension of java code files?",
+     A:".js",
+     B:"txt",
+     C:".class",
+     D:".java",
+     Answer: D
+   },
+   {
+    Numb: 2,
+    questions:"What is printed (system.out.print(hello,\nworld!);?",
+    A:"hello,\nworld",
+    B:"hello,world",
+    C:"Hello world",
+    D:"None of above",
+    Answer: D
+  },
+  {
+    Numb: 3,
+    questions:"Which of the following variable declaration would Not compile in a java program?",
+    A:"int var;",
+    B:"int VAR;",
+    C:"int var1",
+    D:"int1_var;",
+    Answer: D
+  },
+  {
+    Numb: 4,
+    questions:"What is the size of boolean variable?",
+    A:"8 bit",
+    B:"16 bit",
+    C:" 32 bit",
+    D:"not precisely defined",
+    Answer: B
+  },
+  {
+    Numb: 5,
+    questions:"Which of the following is true about String?",
+    A:"String is mutable",
+    B:"String is immutable",
+    C:"String is a data type",
+    D:"None of the above",
+    Answer: B
+  },
+  {
+    Numb: 6,
+    questions:"What is a correct syntaxx to output (Hello world) in java?",
+    A:"System.out.print('hello world')",
+    B:"echo('hello world')",
+    C:"print('Hello World')",
+    Answer: A
+  },
 ];
+ //varible for score
+ var score = 0
+ 
+ //create variable for element
+ var time = document.querySelector("#timerArea")
+ var questioncontain = document.querySelector("#question-container")
+ var point = document.querySelector("#points")
+ var timer = document.querySelector("#startbutton")
+ var highestpoint = document.querySelector("#showscores")
+
+ //second left is 8s per question
+var secondleft = 48;
+// hold time
+var holdInterval = 0;
+// penalty
+var penalty = 10;
+
+var ulCreate = document.createElement("ul");
+
+
+
+timer.addEventListener("click", function() {
+
+  if (holdInterval === 0) {
+    holdInterval = setInterval(function(){
+      secondleft--;
+      time.textContent = "time: " + secondleft;
+
+      if (secondleft<=0) {
+        clearInterval(holdInterval);
+        alldone();
+        time.textContent = "time's up";
+
+      }
+      
+    }, 1000);
+  }
+});
+
+
