@@ -1,96 +1,82 @@
+// Dom Object
+var startbutton = document.getElementById("#start");
+var quiz = document.getElementById("#quiz");
+var question = document.getElementById("#question");
+var totaltime = document.getElementById("#timer")
+var questionnumb = document.getElementById("#question-num");
+var timeRemain  = document.getElementById("#time-remain");
+var timeUse = document.getElementById("#time-use");
+var choiceA = document.getElementById("#A");
+var choiceB = document.getElementById("#B");
+var choiceC = document.getElementById("#C");
+var ChoiceD = document.getElementById("#D");
+var Answer = document.getElementById("#Answer")
+
+var progress = document.getElementById("progress")
+var scoreContainer = document.getElementById("scoreContainer")
+
+//varibles
+
+
 //create question and choices,asnwer
-var questions = [
-   {
-     Numb: 1,
-     questions:"What is the extension of java code files?",
-     A:".js",
-     B:"txt",
-     C:".class",
-     D:".java",
+let questions = [
+   { 
+     question:"What is the extension of java code files?",
+     ChoiceA:".js",
+     ChoiceB:"txt",
+     ChoiceC:".class",
+     ChoiceD:".java",
      Answer: D
    },
    {
-    Numb: 2,
-    questions:"What is printed (system.out.print(hello,\nworld!);?",
-    A:"hello,\nworld",
-    B:"hello,world",
-    C:"Hello world",
-    D:"None of above",
+    question:"What is printed (system.out.print(hello,\nworld!);?",
+    ChoiceA:"hello,\nworld",
+    ChoiceB:"hello,world",
+    ChoiceC:"Hello world",
+    ChoiceD:"None of above",
     Answer: D
   },
   {
-    Numb: 3,
-    questions:"Which of the following variable declaration would Not compile in a java program?",
-    A:"int var;",
-    B:"int VAR;",
-    C:"int var1",
-    D:"int1_var;",
+    question:"Which of the following variable declaration would Not compile in a java program?",
+    ChoiceA:"int var;",
+    ChoiceB:"int VAR;",
+    ChoiceC:"int var1",
+    ChoiceD:"int1_var;",
     Answer: D
   },
   {
-    Numb: 4,
     questions:"What is the size of boolean variable?",
-    A:"8 bit",
-    B:"16 bit",
-    C:" 32 bit",
-    D:"not precisely defined",
+    ChoiceA:"8 bit",
+    ChoiceB:"16 bit",
+    ChoiceC:" 32 bit",
+    ChoiceD:"not precisely defined",
     Answer: B
   },
   {
-    Numb: 5,
     questions:"Which of the following is true about String?",
-    A:"String is mutable",
-    B:"String is immutable",
-    C:"String is a data type",
-    D:"None of the above",
+    ChoiceA:"String is mutable",
+    ChoiceB:"String is immutable",
+    ChoiceC:"String is a data type",
+    ChoiceD:"None of the above",
     Answer: B
   },
   {
-    Numb: 6,
     questions:"What is a correct syntaxx to output (Hello world) in java?",
-    A:"System.out.print('hello world')",
-    B:"echo('hello world')",
-    C:"print('Hello World')",
+    ChoiceA:"System.out.print('hello world')",
+    ChoiceB:"echo('hello world')",
+    ChoiceC:"print('Hello World')",
     Answer: A
   },
 ];
- //varible for score
- var score = 0
- 
- //create variable for element
- var time = document.querySelector("#timerArea")
- var questioncontain = document.querySelector("#question-container")
- var point = document.querySelector("#points")
- var timer = document.querySelector("#startbutton")
- var highestpoint = document.querySelector("#showscores")
+Let QuestionIndex = question.length -1;
+let runningquestionIndex = 0;
 
- //second left is 8s per question
-var secondleft = 48;
-// hold time
-var holdInterval = 0;
-// penalty
-var penalty = 10;
+function renderQuestion() {
+  let q = question [runningquestionIndex];
+  question.innerHTML = "<p>" q.question+ "</p";
+  ChoiceA.innerHTML = q.choiceA;
+  ChoiceB.innerHTML = q.ChoiceB;
+  ChoiceB.innerHTML = q.ChoiceB;
+  ChoiceB.innerHTML = q.ChoiceB; 
 
-var ulCreate = document.createElement("ul");
-
-
-
-timer.addEventListener("click", function() {
-
-  if (holdInterval === 0) {
-    holdInterval = setInterval(function(){
-      secondleft--;
-      time.textContent = "time: " + secondleft;
-
-      if (secondleft<=0) {
-        clearInterval(holdInterval);
-        alldone();
-        time.textContent = "time's up";
-
-      }
-      
-    }, 1000);
-  }
-});
-
-
+}

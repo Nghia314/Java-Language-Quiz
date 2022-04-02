@@ -4,38 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript-Quiz</title>
-    <!-- link css -->
+    <title>Quiz-Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="Quiz">
-        <div class="header">
-             <h1>JavaScript Quiz challenge</h1>
-             <span id="timerArea"></span>
-             <p>Try answer as much as you can within time limit. Please keep in mind everytime you get it wrong, it will penalty<span> 10 sec</span>from your current-Time</p>
+    <button id="start"> Start Quiz</button>
+    <div id="quiz">
+        <div id="question"> Question</div>
+        <div id="timer">
+            <div id="question-num"> 6 </div>
+            <div id="time-remain"></div>
+            <div id="time-use"></div>
         </div>
-        <section id="question-container">
-         <ul>
-            <div id="question"></div>
-            <div id="choices"></div>
-            <div id="answer"></div>
-         </ul>
-        </section>
-        <section class="scores">
-            <div id="points"></div>
-        </section>
-        <section class="controls">
-            <button class="start" id="startbutton">START</button>
-            <button id="scoresSubmit" class="Submit">Submit Your scores</button>
-            <button class="button" id="showscores">See High scores</button>
-        </section>
-        
-
-    </main>
-
+        <div id="choices">
+            <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
+            <div class="choice" id="B" onclick="checkAnswer('B')">B</div>
+            <div class="choice" id="C" onclick="checkAnswer('C')">C</div>
+            <div class="choice" id="D" onclick="checkAnswer('D')">D</div>
+            <div class="Choice" id="Answer">Answer</div>
+        </div>
+        <div id="progress"><div class="prog"></div>
+    </div>
+    <div id="scoreContainer">50%</div>
     <script src="script.js"></script>
-    
 </body>
-
 </html>
