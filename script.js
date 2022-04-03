@@ -1,23 +1,48 @@
 // Dom Object
-var startbutton = document.getElementById("#start");
-var quiz = document.getElementById("#quiz");
-var question = document.getElementById("#question");
-var totaltime = document.getElementById("#timer")
-var questionnumb = document.getElementById("#question-num");
-var timeRemain  = document.getElementById("#time-remain");
-var timeUse = document.getElementById("#time-use");
-var choiceA = document.getElementById("#A");
-var choiceB = document.getElementById("#B");
-var choiceC = document.getElementById("#C");
-var ChoiceD = document.getElementById("#D");
-var Answer = document.getElementById("#Answer")
-
-var progress = document.getElementById("progress")
-var scoreContainer = document.getElementById("scoreContainer")
-
+var QestionContaienr = document.getElementById("QestionContaienr");
+var question = document.getElementById("question");
+var Answer = document.getElementById("Answer");
+var Timerplace = document.getElementById("Timerplace");
+var scoreplace = document.getElementById("scoreplace");
+var startButton = document.getElementById("startButton");
+var showscore = document.getElementById("showscore");
 //varibles
+let Timer = 48;
+let runningTimer;
+let score = 0;
+let qNumber ;
+let finalScore;
+let Max_Score = 6
 
+//funtion to start game and see highscore
+startButton.addEventListener("click",startGame);
+showscore.addEventListener("click", displayScores);
 
+function startGame() {
+  startButton.classList.add("hide");
+  scoreArea.classList.add("hide");
+  AnswerButton.classList.remove("hide");
+  qNumber=0;
+  scoreplace.innerHTML= "";
+  startClock();
+  while (AnswerButton.firstChild);{
+    AnswerButton.removeChild(AnswerButton.firstChild);
+  }
+  showQuestion(question[qNumber]);
+}
+//display question after hit start
+function showQuestion(question) {
+  question.innerHTML = question.question;
+  question.answers.forEach(answer => {
+    var button = document.createElement("button");
+    button.innerHTML.add("btn");
+    if (answer.Answer) {
+      button.dataset.Answer = answer.Answer;
+    }
+    button.addEventListener("click", SelectAnswer);
+    answersButton.appendChild(button);
+  });
+}
 //create question and choices,asnwer
 let questions = [
    { 
@@ -68,54 +93,3 @@ let questions = [
     Answer: A
   },
 ];
-let QuestionIndex = question.length -1;
-let runningquestionIndex = 0;
-
-function renderQuestion() {
-  let q = question [runningquestionIndex];
-  question.innerHTML = "<p>" + q.question+ "</p";
-  ChoiceA.innerHTML = q.choiceA;
-  ChoiceB.innerHTML = q.ChoiceB;
-  ChoiceC.innerHTML = q.ChoiceC;
-  ChoiceD.innerHTML = q.ChoiceD; 
-}
-function answerIscorrect() {
-  document.getElementById(runningquestionIndex).style.backgroundColor ="green"
-}
-function answerIswrong() {
-  document.getElementById(runningquestionIndex).style.backgroundColor ="red"
-}
-
-var questionTime = 10;
-var timerwidth = 150;
-let count = 0;
-var timeProgressUnit = timerwidth / questionTime;
-
-function timer() {
-  if (count<= questionTime) {
-    Counter.innerHTML = count;
-    timegauge.style.width = timeProgressUnit * count + "px";
-    count++;
-  }
-  else {
-    count = 0;
-    answerIswrong();
-    if( runningquestionIndex < QuestionIndex) {
-      runningquestionIndex++;
-      renderQuestion();
-    }
-    else{
-      clearInterval(TIMER);
-      scorerender();
-    }
-  }
-}
-let TIMER=
-setInterval(time,1000);
-
-function checkAnswer(Answer) {
-  if (question[runningquestionIndex].Answer == Answer){
-    score++;
-    answerIscorrect
-  }
-}

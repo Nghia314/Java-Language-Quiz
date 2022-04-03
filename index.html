@@ -8,24 +8,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="start"> Start Quiz</div>
-    <div id="quiz">
-        <div id="question"> Question</div>
-        <div id="timer">
-            <div id="question-num"> 6 </div>
-            <div id="time-remain"></div>
-            <div id="time-use"></div>
-        </div>
-        <div id="choices">
-            <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
-            <div class="choice" id="B" onclick="checkAnswer('B')">B</div>
-            <div class="choice" id="C" onclick="checkAnswer('C')">C</div>
-            <div class="choice" id="D" onclick="checkAnswer('D')">D</div>
-            <div class="Choice" id="Answer">Answer</div>
-        </div>
-        <div id="progress"><div class="prog"></div>
-    </div>
-    <div id="scoreContainer">50%</div>
+   <main class="Startquiz">
+       <header id="Header"> 
+           <h1>48 Seconds Quiz Game</h1>
+           <span id="Timerplace"></span>
+       </header>
+       <section id="QuestionContainer">
+           <div id="question"></div>
+           <div id="Answer"></div>
+       </section>
+       <section id="score">
+           <div id="Scoreplace"></div>
+       </section>
+       <section id="button">
+           <button id="startButton">START</button>
+           <button id="showscore">See Your Scores</button>
+           <div id="scoreplace">
+               <span id="scoreDisplay"></span>
+               <input type="text" name="Initials" id="Initials">
+               <button id="Submit">Submit Score</button>
+           </div>
+       </section>
+   </main>
     <script src="script.js"></script>
 </body>
 </html>
