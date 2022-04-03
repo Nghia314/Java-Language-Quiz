@@ -68,15 +68,54 @@ let questions = [
     Answer: A
   },
 ];
-Let QuestionIndex = question.length -1;
+let QuestionIndex = question.length -1;
 let runningquestionIndex = 0;
 
 function renderQuestion() {
   let q = question [runningquestionIndex];
-  question.innerHTML = "<p>" q.question+ "</p";
+  question.innerHTML = "<p>" + q.question+ "</p";
   ChoiceA.innerHTML = q.choiceA;
   ChoiceB.innerHTML = q.ChoiceB;
-  ChoiceB.innerHTML = q.ChoiceB;
-  ChoiceB.innerHTML = q.ChoiceB; 
+  ChoiceC.innerHTML = q.ChoiceC;
+  ChoiceD.innerHTML = q.ChoiceD; 
+}
+function answerIscorrect() {
+  document.getElementById(runningquestionIndex).style.backgroundColor ="green"
+}
+function answerIswrong() {
+  document.getElementById(runningquestionIndex).style.backgroundColor ="red"
+}
 
+var questionTime = 10;
+var timerwidth = 150;
+let count = 0;
+var timeProgressUnit = timerwidth / questionTime;
+
+function timer() {
+  if (count<= questionTime) {
+    Counter.innerHTML = count;
+    timegauge.style.width = timeProgressUnit * count + "px";
+    count++;
+  }
+  else {
+    count = 0;
+    answerIswrong();
+    if( runningquestionIndex < QuestionIndex) {
+      runningquestionIndex++;
+      renderQuestion();
+    }
+    else{
+      clearInterval(TIMER);
+      scorerender();
+    }
+  }
+}
+let TIMER=
+setInterval(time,1000);
+
+function checkAnswer(Answer) {
+  if (question[runningquestionIndex].Answer == Answer){
+    score++;
+    answerIscorrect
+  }
 }
