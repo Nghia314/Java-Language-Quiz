@@ -1,89 +1,169 @@
-var startButton = document.getElementById("start-btn");
+// Dom object
+var startButton = document.getElementById("start-btn")
+var nextButton = document.getElementById("next-btn")
 var questionContainerElement = document.getElementById("questions-container");
-var questionElement = document.getElementById("question");
+var questionElement = document.getElementById("questions");
 var answerElementButton = document.getElementById("answer-buttons");
-
+var scoreElement = document.getElementById("point");
+var countdown = document.getElementById("Time")
 let shuffledQuestion, currentQuestionIndex;
+// varibles for timer and point
+let timer = 48;
+let score = 0;
+
 
 startButton.addEventListener("click", startgame);
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
+
+
 
 function startgame() {
   console.log("started");
   startButton.classList.add("hide");
+  scoreElement.classList.add("hide");
   shuffledQuestion = questions.sort(() => Math.random() - 0.5);
-  currentQuestionIndex = 0;
+  currentQuestionIndex = 0
   questionContainerElement.classList.remove("hide")
+  scoreElement.innerHTML="";
+  startTime();
   setNextQuestion()
 }
+function startTime () {
+  countdown.innerHTML = 'Time Remaining: ' + timer;
+  if (timer <= 0) {
+    gameover();
+  } else {
+    timer -= 1;
+    runningTimer = setTimeout(startTime, 1000);
+  }
+}
+function gameover () {
+  clearInterval(runningTimer);
+  countdown.innerHTML="Finished"
+  currentQuestionIndex();
+  resetState();
+  startButton.innerText = "Restart";
+  startButton.classList.remove("hide");
+  timer = 0;
+  score = 0
+}
+
 
 function setNextQuestion() {
-  showQuestion(shuffledQuestion[currentQuestionIndex]);
+  resetState();
+  showQuestion(shuffledQuestion[currentQuestionIndex])
 }
 function showQuestion(questions) {
   questionElement.innerText = questions.questions
-  questions.Answer.forEach(Answer =>{
+  questions.Answer.forEach(answer => {
     const button = document.createElement("button")
-    button.innerText = asnwer.Choice
+    button.innerText = answer.text
     button.classList.add("btn")
+    if( answer.correct) {
+      button.dataset.correct = answer.correct
+    }
+    button.addEventListener("click", selectAnswer)
+    answerElementButton.appendChild(button)
   })
 }
+function resetState() {
+  nextButton.classList.add("hide")
+  while (answerElementButton.firstChild)
+    answerElementButton.removeChild
+    (answerElementButton.firstChild)
+}
 
-function selectAnswer() {}
+function selectAnswer(e) {
+  var selectButton = e.target
+  if (!selectButton.dataset.correct){
+    timer = timer - 10;
+  }else{
+    (!selectButton.dataset.correct); {
+      currentQuestionIndex();
+    }
+  }
+  var correct = selectButton.dataset.correct
+  setStatusClass(document.body, correct)
+  Array.from(answerElementButton.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct)
+  })
+  if (shuffledQuestion.length > currentQuestionIndex + 1) {
+  nextButton.classList.remove("hide")
+  } else {
+    startButton.innerText = "Restart"
+    startButton.classList.remove("hide")
+  }
+}
+function setStatusClass(element, correct) {
+  clearStatusClass(element)
+  if(correct) {
+    element.classList.add("correct")
+  } else{
+    element.classList.add('wrong')
+  }
+}
+function clearStatusClass(element) {
+  element.classList.remove("correct")
+  element.classList.remove("wrong")
+}
 
 //create question and choices,asnwer
 var questions = [
   {
-    question: "What is the extension of java code files?",
+    questions: "What is the extension of java code files?",
     Answer: [
-      { Choice: ".js", correct: false },
-      { Choice: "txt", correct: false },
-      { Choice: ".class", correct: false },
-      { Choice: ".java", correct: true },
+      { text: ".js", correct: false },
+      { text: "txt", correct: false },
+      { text: ".class", correct: false },
+      { text: ".java", correct: true },
     ],
   },
   {
-    question: "What is printed (system.out.print(hello,\nworld!);?",
+    questions: "What is printed (system.out.print(hello,\nworld!);?",
     Answer: [
-      { Choice: "hello,\nworld", correct: false },
-      { Choice: "hello,world", correct: false },
-      { Choice: "Hello world", correct: false },
-      { Choice: "None of above", correct: true },
+      { text: "hello,\nworld", correct: false },
+      { text: "hello,world", correct: false },
+      { text: "Hello world", correct: false },
+      { text: "None of above", correct: true },
     ],
   },
   {
-    question:
+    questions:
       "Which of the following variable declaration would Not compile in a java program?",
     Answer: [
-      { Choice: "int var;", correct: false },
-      { Choice: "int VAR;", correct: false },
-      { Choice: "int var1", correct: false },
-      { Choice: "int1_var;", correct: true },
+      { text: "int var;", correct: false },
+      { text: "int VAR;", correct: false },
+      { text: "int var1", correct: false },
+      { text: "int1_var;", correct: true },
     ],
   },
   {
     questions: "What is the size of boolean variable?",
     Answer: [
-      { Choice: "8 bit", correct: false },
-      { Choice: "16 bit", correct: true },
-      { Choice: " 32 bit", correct: false },
-      { Choice: "not precisely defined", correct: false },
+      { text: "8 bit", correct: false },
+      { text: "16 bit", correct: true },
+      { text: " 32 bit", correct: false },
+      { text: "not precisely defined", correct: false },
     ],
   },
   {
     questions: "Which of the following is true about String?",
     Answer: [
-      { Choice: "String is mutable", correct: false },
-      { Choice: "String is immutable", correct: true },
-      { Choice: "String is a data type", correct: false },
-      { Choice: "None of the above", correct: false },
+      { text: "String is mutable", correct: false },
+      { text: "String is immutable", correct: true },
+      { text: "String is a data type", correct: false },
+      { text: "None of the above", correct: false },
     ],
   },
   {
     questions: "What is a correct syntaxx to output (Hello world) in java?",
     Answer: [
-      { Choice: "System.out.print('hello world')", correct: true },
-      { Choice: "echo('hello world')", correct: false },
-      { Choice: "print('Hello World')", correct: false },
+      { text: "System.out.print('hello world')", correct: true },
+      { text: "echo('hello world')", correct: false },
+      { text: "print('Hello World')", correct: false },
     ],
   },
 ];
