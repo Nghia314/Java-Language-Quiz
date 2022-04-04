@@ -4,10 +4,10 @@ var nextButton = document.getElementById("next-btn");
 var questionContainerElement = document.getElementById("questions-container");
 var questionElement = document.getElementById("questions");
 var answerElementButton = document.getElementById("answer-buttons");
-var Timer = document.getElementById("time");
+var Timer = document.getElementById("Time");
 var Point = document.getElementById("Points")
 // varibles for timer and point
-let Timer = 48;
+let timer = 48;
 let shuffledQuestion,currentQuestionindex
 
 startButton.addEventListener("click", startgame)
@@ -20,23 +20,23 @@ function startgame() {
   startButton.classList.add('hide')
   shuffledQuestion = questions.sort(() => Math.random() - .5)
   currentQuestionindex = 0
-  startclock();
   questionContainerElement.classList.remove('hide')
-  setNextQuestion()
+  setNextQuestion();
+  startclock();
+  
 }
-function startClock() {
-  Timer.innerHTML = "Time Remaining: " + Timer;
-  if (Timer <=0) {
-    gameover()
-  } else {
-    Timer -=1;
-    runningTimer = setTimeout(startClock, 1000);
-  }
-}
-
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestion[currentQuestionindex])
+}
+function startclock () {
+  Timer.innerText= "Time Remaining: " + timer;
+  if (timer <=0) {
+    gameOver();
+  } else {
+    timer -= 1;
+    runningtimer = setTimeout(startclock, 1000)
+  }
 }
 function showQuestion(questions) {
 questionElement.innerText = questions.questions
@@ -77,9 +77,10 @@ function selectAnswer(e) {
 function setStatusclass(element, correct) {
   clearStatusClass(element)
   if (correct) {
-    element.classList.add('correct')
+    element.classList.add('correct');
+    timer = timer - 10;
   } else {
-    element.classList.add("wrong")
+    element.classList.add("wrong");
   }
 }
 function clearStatusClass(element) {
