@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz-Game</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
+
 <body>
-   <main class="Startquiz">
-       <header id="Header"> 
-           <h1>48 Seconds Quiz Game</h1>
-           <span id="Timerplace"></span>
-       </header>
-       <section id="QuestionContainer">
-           <div id="question"></div>
-           <div id="Answer"></div>
-       </section>
-       <section id="score">
-           <div id="Scoreplace"></div>
-       </section>
-       <section id="button">
-           <button id="startButton">START</button>
-           <button id="showscore">See Your Scores</button>
-           <div id="scoreplace">
-               <span id="scoreDisplay"></span>
-               <input type="text" name="Initials" id="Initials">
-               <button id="Submit">Submit Score</button>
-           </div>
-       </section>
-   </main>
-    <script src="script.js"></script>
+    <div class="container">
+        <div id="questions-container" class="hide">
+            <div id="questions">Question</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn" start>Start</button>
+            <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+    </div>
 </body>
+
 </html>
