@@ -6,7 +6,7 @@ var answerElementButton = document.getElementById("answer-buttons");
 var Timer = document.getElementById("Time");
 var Point = document.getElementById("Points")
 // varibles for timer and point
-
+let timer = 60;
 let shuffledQuestion,currentQuestionindex
 
 startButton.addEventListener("click", startgame)
@@ -14,28 +14,28 @@ nextButton.addEventListener("click", () => {
   currentQuestionindex++
   setNextQuestion()
 })
-var totaltime = 60;
+
 function startgame() {
   startButton.classList.add('hide')
   shuffledQuestion = questions.sort(() => Math.random() - .5)
   currentQuestionindex = 0
   questionContainerElement.classList.remove('hide')
-  var startclock = setInterval(function() {
-    totaltime--;
-    Timer.textContent = totaltime;
-    if(totaltime <= 0) {
-      clearInterval(startclock);
-      if (currentQuestionindex < questions.length - 1) {
-        GameOver();
-      }
-    }
-  },1000);
   setNextQuestion();
-};
-
+  startclock();
+  
+}
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestion[currentQuestionindex])
+}
+function startclock () {
+  Timer.innerText= "Time Remaining: " + timer;
+  if (timer <=0) {
+    gameOver();
+  } else {
+    timer -= 1;
+    runningtimer = setTimeout(startclock, 1000)
+  }
 }
 function showQuestion(questions) {
 questionElement.innerText = questions.questions
@@ -50,7 +50,6 @@ questions.Answer.forEach(answer => {
   answerElementButton.appendChild(button)
 })
 }
-
 function resetState () {
   clearStatusClass( document.body)
   nextButton.classList.add('hide')
@@ -65,29 +64,27 @@ function selectAnswer(e) {
   Array.from(answerElementButton.children).forEach(button => {
     setStatusclass(button, button.dataset.correct)
   })
+  if (correct) {
+    setNextQuestion();
+  } else {
+    (timer = timer - 10);
+  }
+  //look intothis
   if(shuffledQuestion.length > currentQuestionindex +1) {
     nextButton.classList.remove('hide')
   } else {
     startButton.innerText = "GameOver"
-    startButton.classList.add('hide')
-    nextButton.innerText = "Submit"
-    nextButton.classList.remove('hide')
+    //startButton.classList.remove('hide')
+    showQuestion.classList.add('hide')
   }
 }
-
-function gameOver() {
-  questionContainerElement.classList.add('hide')
-
-}
+//look in to this
 function setStatusclass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct');
-   
   } else {
     element.classList.add("wrong");
-     totaltime -= 5;
-    Timer.textContent= totaltime;
   }
 }
 function clearStatusClass(element) {
