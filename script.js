@@ -77,7 +77,7 @@ function render(currentQuestionindex) {
     var choices = questions[currentQuestionindex].text;
     questionContainerElement.textContent = numquestions;
   }
-  choices.forEach(function(item) {
+  choices.forEach(function (item) {
     var listchoice = document.createElement("li")
     listchoice.textContent = item;
     questionContainerElement.appendChild(ulCreate);
@@ -87,11 +87,12 @@ function render(currentQuestionindex) {
 }
 
 function compare(event) {
-  var answer = event.target;
-  if (answer.matches("li")) {
+  var answerelement = event.target;
+
+  if (answerelement.matches("li")) {
     var createDiv = document.createElement("div");
     createDiv.setAttribute("id", "createDiv");
-    if(answer.textContent == questions[currentQuestionindex].answer) {
+    if(answerelement.textContent == questions[currentQuestionindex].answer) {
       point++;
       createDiv.textContent = "Congra!!! the answer is: " + questions(currentQuestionindex).answer;
     } else {
@@ -154,3 +155,30 @@ questionContainerElement.appendChild(input);
 var submit = document.createElement("button");
 submit.setAttribute("id", "Submit");
 submit.setAttribute("type", "Submit");
+submit.textContent = "submit";
+
+questionContainerElement.appendChild(submit);
+
+submit.addEventListener("click", function() {
+  var Initials= input.value;
+
+  if (Initials === null) {
+    console.log("No value entered!");
+  } else {
+    var finalscore= {
+      Initials: Initials,
+      point: timerRemaining
+    }
+    var allscores = localStorage.getItem("allscores");
+    if (allscores === null) {
+      allscores = [];
+    } else {
+      allscores = JSON.parse(allscores);
+    }
+    allscores.push(finalscore);
+    var newscore= JSON.stringify(allscores);
+    localStorage.setItem("allscores", "newscore");
+
+    window.location.replace("./Seescore.html")
+  }
+});
