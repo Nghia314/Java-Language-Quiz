@@ -1,153 +1,105 @@
-var startButton = document.getElementById("start-btn");
-var nextButton = document.getElementById("next-btn");
-var questionContainerElement = document.getElementById("questions-container");
-var questionElement = document.getElementById("questions");
-var answerElementButton = document.getElementById("answer-buttons");
-var Timer = document.getElementById("Time");
-var Point = document.getElementById("Points")
-// varibles for timer and point
 
-let shuffledQuestion,currentQuestionindex
-
-startButton.addEventListener("click", startgame)
-nextButton.addEventListener("click", () => {
-  currentQuestionindex++
-  setNextQuestion()
-})
-var totaltime = 60;
-function startgame() {
-  startButton.classList.add('hide')
-  shuffledQuestion = questions.sort(() => Math.random() - .5)
-  currentQuestionindex = 0
-  questionContainerElement.classList.remove('hide')
-  var startclock = setInterval(function() {
-    totaltime--;
-    Timer.textContent = totaltime;
-    if(totaltime <= 0) {
-      clearInterval(startclock);
-      if (currentQuestionindex < questions.length - 1) {
-        GameOver();
-      }
-    }
-  },1000);
-  setNextQuestion();
-};
-
-function setNextQuestion() {
-  resetState()
-  showQuestion(shuffledQuestion[currentQuestionindex])
-}
-function showQuestion(questions) {
-questionElement.innerText = questions.questions
-questions.Answer.forEach(answer => {  
-  const button = document.createElement("button")
-  button.innerText = answer.text
-  button.classList.add("btn");
-  if (answer.correct) {
-    button.dataset.correct = answer.correct
-  }
-  button.addEventListener('click', selectAnswer)
-  answerElementButton.appendChild(button)
-})
-}
-
-function resetState () {
-  clearStatusClass( document.body)
-  nextButton.classList.add('hide')
-  while (answerElementButton.firstChild) {
-    answerElementButton.removeChild(answerElementButton.firstChild)
-  }
-}
-function selectAnswer(e) {
-  const selectedButton = e.target
-  const correct = selectedButton.dataset.correct
-  setStatusclass(document.body, correct)
-  Array.from(answerElementButton.children).forEach(button => {
-    setStatusclass(button, button.dataset.correct)
-  })
-  if(shuffledQuestion.length > currentQuestionindex +1) {
-    nextButton.classList.remove('hide')
-  } else {
-    startButton.innerText = "GameOver"
-    startButton.classList.add('hide')
-    nextButton.innerText = "Submit"
-    nextButton.classList.remove('hide')
-  }
-}
-
-function gameOver() {
-  questionContainerElement.classList.add('hide')
-
-}
-function setStatusclass(element, correct) {
-  clearStatusClass(element)
-  if (correct) {
-    element.classList.add('correct');
-   
-  } else {
-    element.classList.add("wrong");
-     totaltime -= 5;
-    Timer.textContent= totaltime;
-  }
-}
-function clearStatusClass(element) {
-  element.classList.remove('correct')
-  element.classList.remove('wrong')
-}
 //create question and choices,asnwer
 var questions = [
   {
     questions: "What is the extension of java code files?",
-    Answer: [
-      { text: ".js", correct: false },
-      { text: "txt", correct: false },
-      { text: ".class", correct: false },
-      { text: ".java", correct: true },
-    ],
+      text: ".js",
+      text: "txt",
+      text: ".class",
+      text: ".java",
+      answer: ".java"
   },
   {
     questions: "What is printed (system.out.print(hello,\nworld!);?",
-    Answer: [
-      { text: "hello,\nworld", correct: false },
-      { text: "hello,world", correct: false },
-      { text: "Hello world", correct: false },
-      { text: "None of above", correct: true },
-    ],
+      text: "hello,\nworld",
+      text: "hello,world",
+      text: "Hello world",
+      text: "None of above",
+      answer: "None of above"
   },
   {
     questions:
       "Which of the following variable declaration would Not compile in a java program?",
-    Answer: [
-      { text: "int var;", correct: false },
-      { text: "int VAR;", correct: false },
-      { text: "int var1", correct: false },
-      { text: "int1_var;", correct: true },
-    ],
+      text: "int var;",
+      text: "int VAR;",
+      text: "int var1",
+      text: "int1_var;",
+      answer: "int1_var;"
   },
   {
     questions: "What is the size of boolean variable?",
-    Answer: [
-      { text: "8 bit", correct: false },
-      { text: "16 bit", correct: true },
-      { text: " 32 bit", correct: false },
-      { text: "not precisely defined", correct: false },
-    ],
+      text: "8 bit",
+      text: "16 bit",
+      text: " 32 bit",
+      text: "not precisely defined",
+      answer: "16 bit"
   },
   {
     questions: "Which of the following is true about String?",
-    Answer: [
-      { text: "String is mutable", correct: false },
-      { text: "String is immutable", correct: true },
-      { text: "String is a data type", correct: false },
-      { text: "None of the above", correct: false },
-    ],
+      text: "String is mutable",
+      text: "String is immutable",
+      text: "String is a data type",
+      text: "None of the above",
+      answer: "String is immutable"
   },
   {
     questions: "What is a correct syntaxx to output (Hello world) in java?",
-    Answer: [
-      { text: "System.out.print('hello world')", correct: true },
-      { text: "echo('hello world')", correct: false },
-      { text: "print('Hello World')", correct: false },
-    ],
+      text: "System.out.print('hello world')",
+      text: "echo('hello world')",
+      text: "System.println('hello world')",
+      answer: "System.out.print('hello world')"
   },
 ];
+
+var point = 0;
+var currentQuestionindex = 0;
+
+//declare variable
+var container = document.getElementById("container")
+var questionContainerElement = document.getElementById("questioncontainer")
+var timer = document.getElementById("start-btn")
+var timerRemaining = document.getElementById("timeRemaining")
+
+var timeleft = 60;
+
+var secondInterval = 0;
+
+var penalty = 10;
+
+var ulCreate = document.createElement("ul")
+
+timer.addEventListener("click", function() {
+  if ( secondInterval === 0) {
+    secondInterval = setInterval(function () {
+      timeleft--;
+      timerRemaining.textContent= "Time Remaining: " + timeleft;
+
+      if (timeleft <= 0) {
+        clearInterval(secondInterval);
+        GameOver();
+        timerRemaining.textContent = "All Done";
+      }
+    },1000);
+  }
+  render(currentQuestionindex);
+});
+
+function render(currentQuestion) {
+  questionContainerElement.innerText = "";
+  ulCreate.innerText = "";
+
+  for (var i = 0; i < questions.length; i++) {
+
+    var questions = questions[currentQuestionindex].questions;
+    var choices = questions[currentQuestionindex].text;
+    questionContainerElement.textContent = questions;
+  }
+  choices.forEach(function(newitem) {
+    var listchoice = document.createElement("li")
+    listchoice.textContent = newitem;
+    questionContainerElement.appendChild(ulCreate);
+    ulCreate.appendChild(listchoice);
+    listchoice.addEventListener("click", (compare));
+  })
+}
+
