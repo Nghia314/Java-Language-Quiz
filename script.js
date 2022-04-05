@@ -2,7 +2,7 @@
 //create question and choices,asnwer
 var questions = [
   {
-    questions: "What is the extension of java code files?",
+    question: "What is the extension of java code files?",
       text: ".js",
       text: "txt",
       text: ".class",
@@ -10,7 +10,7 @@ var questions = [
       answer: ".java"
   },
   {
-    questions: "What is printed (system.out.print(hello,\nworld!);?",
+    question: "What is printed (system.out.print(hello,\nworld!);?",
       text: "hello,\nworld",
       text: "hello,world",
       text: "Hello world",
@@ -18,7 +18,7 @@ var questions = [
       answer: "None of above"
   },
   {
-    questions:
+    question:
       "Which of the following variable declaration would Not compile in a java program?",
       text: "int var;",
       text: "int VAR;",
@@ -27,7 +27,7 @@ var questions = [
       answer: "int1_var;"
   },
   {
-    questions: "What is the size of boolean variable?",
+    question: "What is the size of boolean variable?",
       text: "8 bit",
       text: "16 bit",
       text: " 32 bit",
@@ -35,7 +35,7 @@ var questions = [
       answer: "16 bit"
   },
   {
-    questions: "Which of the following is true about String?",
+    question: "Which of the following is true about String?",
       text: "String is mutable",
       text: "String is immutable",
       text: "String is a data type",
@@ -43,7 +43,7 @@ var questions = [
       answer: "String is immutable"
   },
   {
-    questions: "What is a correct syntaxx to output (Hello world) in java?",
+    question: "What is a correct syntaxx to output (Hello world) in java?",
       text: "System.out.print('hello world')",
       text: "echo('hello world')",
       text: "System.println('hello world')",
@@ -84,15 +84,15 @@ timer.addEventListener("click", function() {
   render(currentQuestionindex);
 });
 
-function render(currentQuestion) {
+function render(currentQuestionindex) {
   questionContainerElement.innerText = "";
   ulCreate.innerText = "";
 
   for (var i = 0; i < questions.length; i++) {
 
-    var questions = questions[currentQuestionindex].questions;
+    var numquestions = questions[currentQuestionindex].question;
     var choices = questions[currentQuestionindex].text;
-    questionContainerElement.textContent = questions;
+    questionContainerElement.textContent = numquestions;
   }
   choices.forEach(function(newitem) {
     var listchoice = document.createElement("li")
@@ -103,3 +103,26 @@ function render(currentQuestion) {
   })
 }
 
+function compare(event) {
+  var answer = event.target;
+  if (answer.matches("li")) {
+    var createDiv = document.createElement("div");
+    createDiv.setAttribute("id", "createDiv");
+    if(answer.textContent == questions[currentQuestionindex].answer) {
+      point++;
+      createDiv.textContent = "Congra!!! the answer is: " + questions(currentQuestionindex).answer;
+    } else {
+      timeleft = timeleft - penalty;
+      createDiv.textContent = "Opps! the correct answer is: " + questions[currentQuestionindex].answer;
+    }
+  }
+  currentQuestionindex++;
+
+  if( currentQuestionindex >= questions.length) {
+    gameOver();
+    createDiv.textContent = "Quiz end!" + "" + "You got " + point + "/" + questions.length + "Correct!";
+  } else {
+    render(currentQuestionindex);
+  }
+  questionContainerElement.appendChild(createDiv);
+}
