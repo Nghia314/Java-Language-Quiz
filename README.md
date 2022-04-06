@@ -7,16 +7,19 @@ it also save up the user score and intinials into the local storage. The user ca
 ### Usage
 - The following image is a method to save up infomation into the local storage.
 
+<img width="1440" alt="Screen Shot 2022-04-05 at 9 16 18 PM" src="https://user-images.githubusercontent.com/100381618/161898844-de1b7aae-e715-4a15-ad51-a16efd8c7aa6.png">
 
 #### Credit
 - I personally have to watch the turtorial video to help me with this project.
-https://www.youtube.com/watch?v=riDzcEQbX6k - Web Dev Simplified
-https://www.youtube.com/watch?v=49pYIMygIcU - Code Explained
-https://www.youtube.com/watch?v=f4fB9Xg2JEY - Brian Design
+- https://www.youtube.com/watch?v=riDzcEQbX6k - Web Dev Simplified
+- https://www.youtube.com/watch?v=49pYIMygIcU - Code Explained
+- https://www.youtube.com/watch?v=f4fB9Xg2JEY - Brian Design
 
 ##### Result
 - Deployled link -
 
+<img width="1440" alt="Screen Shot 2022-04-05 at 9 21 51 PM" src="https://user-images.githubusercontent.com/100381618/161898866-61ac1e8b-90bf-4219-9b0b-cce218942806.png">
+<img width="1440" alt="Screen Shot 2022-04-05 at 9 21 53 PM" src="https://user-images.githubusercontent.com/100381618/161898883-9d9b3adb-69ed-4dee-9848-e81598a35717.png">
 
 
 ###### License
