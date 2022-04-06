@@ -161,7 +161,7 @@ function GameOver() {
     questionContainerElement.appendChild(createp2);
   }
 
-  // create a placeholder for initial and submit button
+  // end game:create a placeholder for initial and submit button
   var label = document.createElement("label");
   label.setAttribute("type", "label");
   label.textContent = "Your Initials: ";
