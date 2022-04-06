@@ -112,7 +112,7 @@ function compare(event) {
 // if the user time is less than the timeleft or finish the text iis game over
   if( currentQuestionindex >= questions.length) {
     GameOver();
-    createDiv.textContent = "Quiz end!" + "" + "You got " + point + "/" + questions.length + "Correct!";
+    createDiv.textContent = "Quiz end!" + " " + "You got " + point + "/" + questions.length + "Correct!";
   } else {
     render(currentQuestionindex);
   }
@@ -136,7 +136,7 @@ function GameOver() {
 
   createp.appendChild(createp)
   
-  if(timeleft >= 0) {
+  if (timeleft >= 0) {
     var timerRemain= timeleft;
     var createp2 = document.createElement("p");
     clearInterval(secondInterval);
@@ -144,10 +144,10 @@ function GameOver() {
 
     questionContainerElement.appendChild(createp2)
   }
-} 
-
+}
+// create a placeholder for initial and submit button
 var label = document.createElement("label")
-label.setAttribute("type", "text");
+label.setAttribute("type", "label");
 label.textContent = "Your Initials: ";
 
 questionContainerElement.appendChild(label);
@@ -162,8 +162,8 @@ questionContainerElement.appendChild(input);
 
 var submit = document.createElement("button");
 submit.setAttribute("id", "Submit");
-submit.setAttribute("type", "Submit");
-submit.textContent = "submit";
+submit.setAttribute("type", "submit");
+submit.textContent = "Submit";
 
 questionContainerElement.appendChild(submit);
 

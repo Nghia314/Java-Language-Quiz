@@ -1,14 +1,14 @@
 // Declare variable for point and clear point
-var Score = document.getElementById("score");
+var Score = document.getElementById("Score");
 var clearscore = document.getElementById("Clear");
 
 
-clear.addEventListener("click", function() {
+clearscore.addEventListener("click", function() {
     localStorage.clear();
     location.reload();
 });
  var allscores = localStorage.getItem("allscores");
- allscores = JSON.parse(allpoint);
+ allscores = JSON.parse(allscores);
 
  if (allscores !== null) {
      for (var i = 0; i < allscores.length; i++) {
