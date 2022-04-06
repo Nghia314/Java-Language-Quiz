@@ -16,7 +16,7 @@ it also save up the user score and intinials into the local storage. The user ca
 - https://www.youtube.com/watch?v=f4fB9Xg2JEY - Brian Design
 
 ##### Result
-- Deployled link -
+- Deployled link - https://nghia314.github.io/Java-Language-Quiz/
 
 <img width="1440" alt="Screen Shot 2022-04-05 at 9 21 51 PM" src="https://user-images.githubusercontent.com/100381618/161898866-61ac1e8b-90bf-4219-9b0b-cce218942806.png">
 <img width="1440" alt="Screen Shot 2022-04-05 at 9 21 53 PM" src="https://user-images.githubusercontent.com/100381618/161898883-9d9b3adb-69ed-4dee-9848-e81598a35717.png">
